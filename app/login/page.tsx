@@ -19,7 +19,7 @@ export default function LoginPage() {
           alt={session.user.name ?? "Arfatur Rahman"}
           className="rounded-full w-24 h-24 mt-4"
         />
-        <LinkButton href="/dashboard" value="Dashboard" />
+        <LinkButton href="/mistral-ai" value="Mistral AI" />
         <button
           onClick={() =>
             signOut({

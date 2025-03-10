@@ -2,7 +2,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const DashboardClientComponent = () => {
+const MistralAIClientComponent = () => {
   const [rawData, setRawData] = useState();
 
   return (
@@ -29,4 +29,4 @@ const DashboardClientComponent = () => {
   );
 };
 
-export default DashboardClientComponent;
+export default MistralAIClientComponent;
