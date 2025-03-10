@@ -18,9 +18,8 @@ const InputSubmitStreamComponent = ({
   buttonValue?: string;
 }) => {
   const [inputText, setInputText] = useState(defaultInput);
-  const { isLoading, responses, startStream } = useStreamResponseHook(
-    `/api/mistral/chat-stream`
-  );
+  const { isLoading, responses, startStream } =
+    useStreamResponseHook(endPoints);
   const handleSubmit = async () => {
     if (!inputText) return toast.error("Input text is requried");
     startStream(inputText);

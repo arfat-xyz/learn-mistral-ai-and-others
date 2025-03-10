@@ -8,7 +8,7 @@ const StreamPage = () => {
     <InputSubmitStreamComponent
       buttonValue="Stream"
       defaultInput="What is the name of out galaxy"
-      endPoints={`/api/mistral/chat-stream`}
+      endPoints={`/api/mistral/stream`}
       heading="Stream"
     />
   );
