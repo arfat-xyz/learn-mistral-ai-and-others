@@ -1,5 +1,6 @@
 "use client";
 import { sidebarLinks } from "@/lib/constants";
+import { removeDashFromString } from "@/lib/utils-function";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
@@ -27,7 +28,7 @@ const DashboardLayoutClientComponent = ({
                       pathname === href && "bg-gray-200"
                     }`}
                   >
-                    {value}
+                    {removeDashFromString(value)}
                   </Link>
                 </li>
               ))}
