@@ -10,18 +10,27 @@ if (!commitMessage) {
 }
 
 // Function to execute commands and handle their output
-const executeCommand = (command, successMessage) => {
+const executeCommand = (command, successMessage, isPushCommand = false) => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
       if (error) {
         reject(`Error: ${error.message}`);
         return;
       }
+
+      // If it's a git push, handle stderr as a success message
+      if (isPushCommand && stderr && stderr.includes("main -> main")) {
+        console.log(`Git Push Success: ${stderr}`);
+        resolve(stdout);
+        return;
+      }
+
+      // Handle other stderr as an error
       if (stderr) {
-        // Only log stderr if it's an actual error (not the standard git push message)
         reject(`Stderr: ${stderr}`);
         return;
       }
+
       if (stdout) {
         console.log(successMessage, stdout);
       }
@@ -44,7 +53,11 @@ executeCommand("git add .", "Files added successfully:")
     console.log("Commit Output:", commitOutput);
 
     // Execute git push
-    return executeCommand("git push", "Push to remote repository successful:");
+    return executeCommand(
+      "git push",
+      "Push to remote repository successful:",
+      true
+    );
   })
   .then((pushOutput) => {
     // Push output example: de502e1..0964973  main -> main
