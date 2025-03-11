@@ -1,5 +1,6 @@
 import { Mistral } from "@mistralai/mistralai"; // Import the Mistral client library
 import { Document } from "langchain/document"; // Import the Document type from LangChain
+import { MistralAIEmbeddings } from "@langchain/mistralai";
 
 // Retrieve the Mistral API key from environment variables
 const apiKey = process.env.MISTRAL_API_KEY;
@@ -19,3 +20,7 @@ export const createMistralEmbedding = async (chunks: Document[]) =>
     model: "mistral-embed", // Specify the Mistral embedding model to use
     inputs: chunks.map((chunk) => chunk.pageContent), // Extract the text content from each document
   });
+
+export const minstralEmbedingsInstance = new MistralAIEmbeddings({
+  model: "mistral-embed", // Default value
+});

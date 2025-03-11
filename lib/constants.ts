@@ -11,4 +11,8 @@ export const sidebarLinks = [
     href: "/mistral-ai/embed-using-mistral-package",
     value: "embed-using-mistral-package",
   },
+  {
+    href: "/mistral-ai/embed-and-store",
+    value: "embed-and-store",
+  },
 ];
