@@ -18,6 +18,7 @@ const executeCommand = (command, successMessage) => {
         return;
       }
       if (stderr) {
+        // Only log stderr if it's an actual error (not the standard git push message)
         reject(`Stderr: ${stderr}`);
         return;
       }
@@ -38,11 +39,17 @@ executeCommand("git add .", "Files added successfully:")
       "Commit message added:"
     );
   })
-  .then(() => {
+  .then((commitOutput) => {
+    // Commit output example: main 0964973 add dynamic code 4
+    console.log("Commit Output:", commitOutput);
+
     // Execute git push
     return executeCommand("git push", "Push to remote repository successful:");
   })
-  .then(() => {
+  .then((pushOutput) => {
+    // Push output example: de502e1..0964973  main -> main
+    console.log("Push Output:", pushOutput);
+
     // Now execute npm run dev and capture its output
     const devProcess = exec("npm run dev");
 
