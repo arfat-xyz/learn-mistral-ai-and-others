@@ -5,32 +5,44 @@ const commitMessage = process.argv[2];
 
 if (!commitMessage) {
   console.error("Error: Please provide a commit message.");
-  console.log('Usage: node deploy.js "Your commit message"');
+  console.log('Usage: node push.js "Your commit message"');
   process.exit(1);
 }
 
-// First execute git commands
-exec(
-  `git add . && git commit -m "${commitMessage}" && git push`,
-  (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error: ${error.message}`);
-      return;
-    }
+// Function to execute commands and handle their output
+const executeCommand = (command, successMessage) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        reject(`Error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        reject(`Stderr: ${stderr}`);
+        return;
+      }
+      if (stdout) {
+        console.log(successMessage, stdout);
+      }
+      resolve(stdout);
+    });
+  });
+};
 
-    // Log stdout (normal output)
-    if (stdout) {
-      console.log(`Git Output: ${stdout}`);
-    }
-
-    // Log stderr if it's actually an error
-    if (stderr && !stderr.includes("main -> main")) {
-      console.error(`Git Error: ${stderr}`);
-    } else if (stderr) {
-      // Git push success message (stdout), which is not an error
-      console.log(`Git Push Success: ${stderr}`);
-    }
-
+// Execute git add
+executeCommand("git add .", "Files added successfully:")
+  .then(() => {
+    // Execute git commit
+    return executeCommand(
+      `git commit -m "${commitMessage}"`,
+      "Commit message added:"
+    );
+  })
+  .then(() => {
+    // Execute git push
+    return executeCommand("git push", "Push to remote repository successful:");
+  })
+  .then(() => {
     // Now execute npm run dev and capture its output
     const devProcess = exec("npm run dev");
 
@@ -45,5 +57,7 @@ exec(
     devProcess.on("close", (code) => {
       console.log(`Server process exited with code ${code}`);
     });
-  }
-);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
