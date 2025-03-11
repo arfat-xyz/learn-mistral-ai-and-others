@@ -17,11 +17,19 @@ exec(
       console.error(`Error: ${error.message}`);
       return;
     }
-    if (stderr) {
-      console.error(`Stderr: ${stderr}`);
-      return;
+
+    // Log stdout (normal output)
+    if (stdout) {
+      console.log(`Git Output: ${stdout}`);
     }
-    console.log(`Output: ${stdout}`);
+
+    // Log stderr if it's actually an error
+    if (stderr && !stderr.includes("main -> main")) {
+      console.error(`Git Error: ${stderr}`);
+    } else if (stderr) {
+      // Git push success message (stdout), which is not an error
+      console.log(`Git Push Success: ${stderr}`);
+    }
 
     // Now execute npm run dev and capture its output
     const devProcess = exec("npm run dev");
