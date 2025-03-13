@@ -8,7 +8,7 @@ import {
   loadFileAndReturnLangDocuments,
   recursiveCharacterTextSplitter,
 } from "@/utils/langchain";
-import { createMistralEmbedding } from "@/utils/mistal";
+import { createMistralEmbeddingUsingDocumentsAndString } from "@/utils/mistal";
 
 /**
  * Handles a POST request.
@@ -34,7 +34,8 @@ export async function POST(request: Request) {
     }
     const text = await loadFileAndReturnLangDocuments(file);
     const output = await recursiveCharacterTextSplitter.splitDocuments(text);
-    const mistralEmbeddings = await createMistralEmbedding(output);
+    const mistralEmbeddings =
+      await createMistralEmbeddingUsingDocumentsAndString(output);
     return formatResponse(mistralEmbeddings, "Data fetched successfully");
   } catch (error) {
     console.log("Error", { error });

@@ -9,6 +9,7 @@ const ChatCompletionsPage = () => {
       defaultInput="how to make best French cheese?"
       endPoints="/api/mistral/chat-stream"
       heading="Chat Stream"
+      showingFormat="text"
     />
   );
 };

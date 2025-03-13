@@ -1,11 +1,11 @@
 "use client";
-import { removeDashFromString } from "@/lib/utils-function";
+import { formatData, removeDashFromString } from "@/lib/utils-function";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoCloseOutline } from "react-icons/io5";
 import { CgSpinnerTwo } from "react-icons/cg";
 import RainbowHeading from "./rainbow-heading";
-import { RawData } from "@/lib/interface";
+import { RawData, ShowFormat } from "@/lib/interface";
 
 const InputFileClientComponent = ({
   endPoints = "",
@@ -16,7 +16,7 @@ const InputFileClientComponent = ({
   endPoints?: string;
   heading?: string;
   buttonText?: string;
-  showingFormat?: "JSON" | "text";
+  showingFormat?: ShowFormat;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [rawData, setRawData] = useState<RawData>();
@@ -75,24 +75,6 @@ const InputFileClientComponent = ({
     }
   };
 
-  /**
-   * Formats raw data based on the specified format.
-   * @param rawData - The raw data to format.
-   * @param format - The format to apply (e.g., "JSON", "text", "markdown").
-   * @returns The formatted data as a string.
-   */
-  const formatData = (rawData: RawData, format: string): string => {
-    switch (format) {
-      case "JSON":
-        return JSON.stringify(rawData, null, 2); // Pretty-print JSON
-      case "text":
-        return rawData?.toString() || ""; // Safely convert to plain text
-      case "markdown":
-        return typeof rawData === "string" ? rawData : JSON.stringify(rawData); // Handle markdown
-      default:
-        return rawData?.toString() || ""; // Fallback to plain text
-    }
-  };
   return (
     <div className="w-full h-full flex flex-col">
       <RainbowHeading text={removeDashFromString(heading)} />

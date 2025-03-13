@@ -15,4 +15,8 @@ export const sidebarLinks = [
     href: "/mistral-ai/embed-and-store",
     value: "embed-and-store",
   },
+  {
+    href: "/mistral-ai/qna-with-rag",
+    value: "qna-with-rag",
+  },
 ];

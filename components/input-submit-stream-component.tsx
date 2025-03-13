@@ -3,19 +3,22 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import RainbowHeading from "./rainbow-heading";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { removeDashFromString } from "@/lib/utils-function";
+import { formatData, removeDashFromString } from "@/lib/utils-function";
 import useStreamResponseHook from "@/hooks/useStreamResponseHook";
+import { RawData, ShowFormat } from "@/lib/interface";
 
 const InputSubmitStreamComponent = ({
   defaultInput = "",
   endPoints = "",
   heading = "Learn Langchain",
   buttonValue = "Submit",
+  showingFormat = "JSON",
 }: {
   endPoints?: string;
   defaultInput?: string;
   heading?: string;
   buttonValue?: string;
+  showingFormat?: ShowFormat;
 }) => {
   const [inputText, setInputText] = useState(defaultInput);
   const { isLoading, responses, startStream } =
@@ -24,6 +27,7 @@ const InputSubmitStreamComponent = ({
     if (!inputText) return toast.error("Input text is requried");
     startStream(inputText);
   };
+
   return (
     <div className="w-full h-full flex flex-col">
       <RainbowHeading text={removeDashFromString(heading)} />
@@ -52,7 +56,7 @@ const InputSubmitStreamComponent = ({
       <div className="w-full min-h-96 break-words border-2 border-dashed rounded-lg shadow-lg text-wrap overflow-auto">
         {responses ? (
           <pre className="w-full min-h-96 break-words whitespace-pre-wrap">
-            {JSON.stringify(responses, null, 2)}
+            {formatData(responses, showingFormat)}
           </pre>
         ) : (
           <h1 className="text-3xl font-bold text-center">

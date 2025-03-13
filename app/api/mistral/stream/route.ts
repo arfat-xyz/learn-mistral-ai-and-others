@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { routeErrorHandler } from "@/lib/api-response";
 import { inputSchema } from "@/lib/zod-validation";
-import { mistralClient } from "@/utils/mistal";
+import { mistralChatStreamResponse, mistralClient } from "@/utils/mistal";
 import {
   iteratorToStream,
   makeIterator,
@@ -20,21 +20,9 @@ export async function POST(request: Request) {
     const { inputText: content } = inputSchema.parse(body);
 
     // Stream a chat response from the Mistral AI model
-    const chatResponse = await mistralClient.chat.stream({
-      model: "mistral-large-latest",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a friendly cheese connoisseur. When asked about cheese, reply concisely and humorously.",
-        },
-        { role: "user", content }, // User's input
-      ],
-      temperature: 0.7, // Controls randomness in the response
-      responseFormat: {
-        type: "text", // Response format is plain text
-      },
-    });
+    const chatResponse = await mistralChatStreamResponse([
+      { role: "user", content }, // User's input
+    ]);
 
     // Convert the chat response iterator into a stream
     const stream = iteratorToStream(makeIterator(chatResponse));
