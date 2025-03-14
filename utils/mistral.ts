@@ -8,17 +8,25 @@ import {
   CompletionEvent,
   EmbeddingResponse,
 } from "@mistralai/mistralai/models/components"; // Import CompletionEvent, representing each step in the response stream
+import { ChatMistralAI } from "@langchain/mistralai";
+import { Tool } from "@mistralai/mistralai/models/components";
 
 // Retrieve the Mistral API key from environment variables
 const apiKey = process.env.MISTRAL_API_KEY;
 
 // Define the Mistral embedding model name (this is the model that generates text embeddings)
-const mistralEmbeddingModelName = "mistral-embed";
-const mistralChatModelName = "mistral-large-latest";
+export const mistralEmbeddingModelName = "mistral-embed";
+export const mistralChatModelName = "mistral-large-latest";
 
 // Initialize the Mistral client with the API key (this is used to interact with Mistral's APIs)
 export const mistralClient = new Mistral({ apiKey: apiKey });
 
+export const mistralLangchainClient = new ChatMistralAI({
+  model: mistralChatModelName,
+  temperature: 0.7,
+  maxRetries: 2,
+  apiKey,
+});
 /**
  * Function to create embeddings for text chunks using Mistral's embedding model.
  * Embeddings are numerical representations of text that capture the semantic meaning of the text.
@@ -98,6 +106,7 @@ export async function mistralChatStreamResponse(
  */
 export async function mistralChatCompleteResponse(
   messages: MistralMessage[], // Array of messages exchanged in the conversation
+  tools: Tool[] = [],
   temperature: number = 0.7 // Controls the creativity of the AI's response (higher values = more randomness)
 ): Promise<ChatCompletionResponse> {
   try {
@@ -115,6 +124,7 @@ export async function mistralChatCompleteResponse(
             },
             ...messages, // Append the user-provided messages after the system message
           ],
+      tools,
       temperature: temperature, // Pass the temperature for controlling randomness
       responseFormat: {
         type: "text", // The response will be in plain text format

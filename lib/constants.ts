@@ -19,4 +19,24 @@ export const sidebarLinks = [
     href: "/mistral-ai/qna-with-rag",
     value: "qna-with-rag",
   },
+  {
+    href: "/mistral-ai/function-calling",
+    value: "function-calling",
+  },
+  {
+    href: "/mistral-ai/second-function-calling",
+    value: "second-function-calling",
+  },
+  {
+    href: "/mistral-ai/unpacking-function-and-arguments",
+    value: "unpacking-function-and-arguments",
+  },
+  {
+    href: "/mistral-ai/unpack-function-and-arguments-and-call-it",
+    value: "unpack-function-and-arguments-and-call-it",
+  },
+  {
+    href: "/mistral-ai/complete-agent",
+    value: "Mistral complete-agent",
+  },
 ];

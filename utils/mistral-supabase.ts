@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js"; // For interacting with Supabase
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase"; // For storing embeddings in Supabase
-import { minstralEmbedingsInstance } from "./mistal";
+import { minstralEmbedingsInstance } from "./mistral";
 // Get environment variables for Supabase and Mistral configuration
 // Why: Environment variables securely store sensitive information like API keys and URLs.
 const sbApiKey = process.env.SUPABASE_API_KEY as string; // Supabase API key for authentication

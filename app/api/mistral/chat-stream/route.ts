@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { routeErrorHandler } from "@/lib/api-response";
 import { inputSchema } from "@/lib/zod-validation";
-import { mistralChatStreamResponse, mistralClient } from "@/utils/mistal";
+import { mistralChatStreamResponse, mistralClient } from "@/utils/mistral";
 import {
   iteratorToStream,
   makeIterator,

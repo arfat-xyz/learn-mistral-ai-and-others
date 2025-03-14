@@ -1,7 +1,7 @@
 // Importing necessary modules and functions
 import { formatResponse, routeErrorHandler } from "@/lib/api-response"; // Functions to format response and handle errors
 import { inputSchema } from "@/lib/zod-validation"; // Zod schema to validate incoming request data
-import { mistralChatCompleteResponse, mistralClient } from "@/utils/mistal"; // Mistral client for interacting with Mistral API
+import { mistralChatCompleteResponse, mistralClient } from "@/utils/mistral"; // Mistral client for interacting with Mistral API
 
 // POST request handler function
 export async function POST(request: Request) {

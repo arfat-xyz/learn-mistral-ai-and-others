@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { routeErrorHandler } from "@/lib/api-response"; // Custom error handler for standardizing error responses
 import { inputSchema } from "@/lib/zod-validation"; // Zod schema for validating input
-import { mistralChatStreamResponse } from "@/utils/mistal"; // Utility function to interact with Mistral AI chat
+import { mistralChatStreamResponse } from "@/utils/mistral"; // Utility function to interact with Mistral AI chat
 import {
   iteratorToStream,
   makeIterator,

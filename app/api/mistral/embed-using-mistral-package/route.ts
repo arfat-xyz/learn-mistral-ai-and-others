@@ -8,7 +8,7 @@ import {
   loadFileAndReturnLangDocuments,
   recursiveCharacterTextSplitter,
 } from "@/utils/langchain";
-import { createMistralEmbeddingUsingDocumentsAndString } from "@/utils/mistal";
+import { createMistralEmbeddingUsingDocumentsAndString } from "@/utils/mistral";
 
 /**
  * Handles a POST request.
