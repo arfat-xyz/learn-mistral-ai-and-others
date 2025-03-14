@@ -466,3 +466,5 @@ With this approach, we’ve successfully built a custom agent that can interact 
 - GitHub: https://github.com/arfat-xyz
 - LinkedIn: https://www.linkedin.com/in/arfat-rahman/
 - Email: [arfatrahman08@gmail.com](mailto:arfatrahman08@gmail.com)
+
+## [Brief Learning](/LEARNING.md)
