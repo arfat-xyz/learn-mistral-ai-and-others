@@ -108,11 +108,11 @@ export async function POST(request: Request) {
           // Return the response after the tool function execution
           return formatResponse(functionREs, "Data fetched successfully");
         }
+
+        // Default response if no special conditions were met
+        return formatResponse(response, "Data fetched successfully");
       }
     }
-
-    // Default response if no special conditions were met
-    return formatResponse("response", "Data fetched successfully");
   } catch (error) {
     // Log and return an error response if any step fails
     console.log("Error", { error });
