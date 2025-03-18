@@ -1,5 +1,6 @@
 "use client";
 import LinkButton from "@/components/link-button";
+import { homepageLinks } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
@@ -19,7 +20,11 @@ export default function HomeClientComponent() {
           alt={session.user.name ?? "Arfatur Rahman"}
           className="rounded-full w-24 h-24 mt-4"
         />
-        <LinkButton href="/mistral-ai" value="Mistral AI" />
+        <div className="flex">
+          {homepageLinks.map(({ href, value }, i) => (
+            <LinkButton key={i} href={href} value={value} />
+          ))}
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 ![arfatur-rahman-mistral-basic-ai-agent-using-nextjs-with-typescript-with-full-backend-code](https://res.cloudinary.com/dftpiu3ai/image/upload/v1741961551/portfolio/zsrl52kcde6r2qhrc8s2.webp)
 
+
 In this tutorial, I will guide you step-by-step on how to use Mistral AI's powerful `mistral-large-latest` model to build a custom agent that can track and respond to payment statuses and transaction dates. This tutorial assumes you have a basic understanding of JavaScript, Next.js, and how to work with APIs. By the end of this guide, you will know how to create a responsive agent that integrates with real-time data fetching functions.
 
 ### Prerequisites

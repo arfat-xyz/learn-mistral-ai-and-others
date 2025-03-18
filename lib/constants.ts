@@ -1,4 +1,11 @@
-export const sidebarLinks = [
+import { LinkType } from "./interface";
+
+export const homepageLinks: LinkType[] = [
+  { href: "/crawlers", value: "Crawlers" },
+  { href: "/mistral-ai", value: "Mistral AI" },
+];
+
+export const mistralSidebarLinks: LinkType[] = [
   { href: "/mistral-ai", value: "Mistral AI" },
   { href: "/mistral-ai/chat-completion", value: "Chat Completion" },
   { href: "/mistral-ai/stream", value: "stream" },
@@ -38,5 +45,12 @@ export const sidebarLinks = [
   {
     href: "/mistral-ai/complete-agent",
     value: "Mistral complete-agent",
+  },
+];
+
+export const cralersLinks: LinkType[] = [
+  {
+    href: "/cralwers",
+    value: "Cralwers",
   },
 ];

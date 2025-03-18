@@ -1,14 +1,19 @@
 "use client";
-import { sidebarLinks } from "@/lib/constants";
+import { mistralSidebarLinks } from "@/lib/constants";
+import { LinkType } from "@/lib/interface";
 import { removeDashFromString } from "@/lib/utils-function";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
+import { CgArrowLeft } from "react-icons/cg";
 
 const DashboardLayoutClientComponent = ({
   children,
+  sidebarLinks = mistralSidebarLinks,
 }: {
   children: ReactNode;
+  sidebarLinks?: LinkType[];
+  sidebarHeading?: string;
 }) => {
   const pathname = usePathname();
   return (
@@ -16,8 +21,14 @@ const DashboardLayoutClientComponent = ({
       <div className="col-span-12 md:col-span-3 mb-6 md:mb-0 md:border-r-2 md:h-screen px-3 py-2">
         <div className="h-full w-full">
           <div className="sidebar p-4">
-            <Link href={"/"} className="text-2xl font-bold mb-6">
-              Home
+            <Link
+              href={"/"}
+              className="text-2xl font-bold mb-6 inline-flex justify-center items-center group transition-all duration-300 relative"
+            >
+              <CgArrowLeft className="absolute opacity-0 top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100  transition-all duration-300" />
+              <span className="group-hover:ml-3 transition-all duration-300">
+                Back
+              </span>
             </Link>
             <ul className="space-y-2 h-[calc(100vh-120px)] overflow-auto">
               {sidebarLinks.map(({ href, value }, i) => (

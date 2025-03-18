@@ -1,5 +1,10 @@
 export type RawData = string | object | number | boolean | null | undefined;
 
+export interface LinkType {
+  href: string;
+  value: string;
+}
+
 export interface MistralMessage {
   role: "system" | "user" | "assistant" | "tool";
   content: string;
